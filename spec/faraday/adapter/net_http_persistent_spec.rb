@@ -41,6 +41,15 @@ RSpec.describe Faraday::Adapter::NetHttpPersistent do
     expect(http.pool.size).to eq(5) if http.respond_to?(:pool)
   end
 
+  it 'rescues timeout as Faraday::TimeoutError' do
+    url = URI('https://example.com')
+
+    adapter = described_class.new
+
+    http = adapter.request(url)
+
+  end
+
   context 'min_version' do
     let(:conn_options) do
       {
